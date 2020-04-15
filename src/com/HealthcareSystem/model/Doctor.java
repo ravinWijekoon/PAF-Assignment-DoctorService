@@ -149,5 +149,55 @@ public class Doctor {
 		}
 		return output;
 	}
+	
+
+	
+	public String readSpecifiedDoctors(String id) {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for reading specified doctor.";
+			}
+			// Prepare the html table to be displayed
+			output = "<table border=\"1\"><tr><th>Doctor Name</th><th>Specialization</th><th>Registration No.</th><th>Address</th><th>Phone</th></tr>";
+			String query = "select * from doctor where doctor_id="+id;
+			Statement stmt = (Statement) con.createStatement();
+			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
+			// iterate through the rows in the result set
+			if(rs.next()) {
+				// String DoctorID = Integer.toString(rs.getInt("doctor_id "));
+				String Name = rs.getString("doctor_name");
+				String specialization = rs.getString("specialization");
+				String regNo = rs.getString("regNo");
+				String address = rs.getString("address");
+				String phone = rs.getString("phone");
+				// Add into the html table
+				output += "<tr><td>" + Name + "</td>";
+				output += "<td>" + specialization + "</td>";
+				output += "<td>" + regNo + "</td>";
+				output += "<td>" + address + "</td>";
+				output += "<td>" + phone + "</td>";
+
+				// buttons
+				/*
+				 * output +=
+				 * "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"
+				 * + "<td><form method=\"post\" action=\"items.jsp\">" +
+				 * "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
+				 * + "<input name=\"userID\" type=\"hidden\" value=\"" + userID + "\">" +
+				 * "</form></td></tr>";
+				 */
+			}
+			con.close();
+			// Complete the html table
+			output += "</table>";
+		} catch (Exception e) {
+			output = "Error while reading the doctor information.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+	
 
 }

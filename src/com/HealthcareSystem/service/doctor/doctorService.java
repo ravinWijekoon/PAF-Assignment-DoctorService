@@ -1,5 +1,7 @@
 package com.HealthcareSystem.service.doctor;
 
+
+import javax.ws.rs.PathParam;
 //For REST Service
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -71,10 +73,17 @@ public class doctorService {
 		// Convert the input string to an XML document
 		Document doc = Jsoup.parse(doctorData, "", Parser.xmlParser());
 
-		// Read the value from the element <userID>
+		// Read the value from the element <doctor_ID>
 		String doctor_id = doc.select("doctor_id").text();
 		String output = Obj.deleteDoctorDetails(doctor_id);
 		return output;
+	}
+	
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	public String readSpecifiedDoctor(@PathParam("id") String d_id) {
+		return Obj.readSpecifiedDoctors(d_id);
 	}
 
 }
