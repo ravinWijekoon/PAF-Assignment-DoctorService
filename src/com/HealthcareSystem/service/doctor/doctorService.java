@@ -84,7 +84,7 @@ public class doctorService {
 	@Produces(MediaType.TEXT_HTML)
 	public String readSpecifiedDoctor(@PathParam("id") String d_id) {
 		return Obj.readSpecifiedDoctors(d_id);
-		//Check
+		//Check1
 	}
 
 }
