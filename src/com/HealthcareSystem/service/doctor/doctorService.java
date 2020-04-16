@@ -84,7 +84,14 @@ public class doctorService {
 	@Produces(MediaType.TEXT_HTML)
 	public String readSpecifiedDoctor(@PathParam("id") String d_id) {
 		return Obj.readSpecifiedDoctors(d_id);
-		//Check1
+		
+	}
+	
+	@GET
+	@Path("/DoctorAppointments/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	public String readAppointmentsForSpecifiedDoctors(@PathParam("id") String d_id) {
+		return Obj.readAppointmentsForSpecifiedDoctors(d_id);
 	}
 
 }
