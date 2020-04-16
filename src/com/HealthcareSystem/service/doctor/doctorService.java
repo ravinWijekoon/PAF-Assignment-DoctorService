@@ -92,7 +92,7 @@ public class doctorService {
 	@Produces(MediaType.TEXT_HTML)
 	public String readAppointmentsForSpecifiedDoctors(@PathParam("id") String d_id) {
 		return Obj.readAppointmentsForSpecifiedDoctors(d_id);
-		//gets appointment details
+		//gets appointment details for specific doctor
 	}
 
 }
